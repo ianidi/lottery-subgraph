@@ -7,12 +7,12 @@ dataSources:
   - kind: ethereum/contract
     name: Lottery
     # prettier-ignore
-    network: {{network}}
+    network: ropsten
     source:
       abi: Lottery
-      address: '{{lottery}}'
+      address: '0xa960d095470f7509955d5402e36d9db984b5c8e2'
       # prettier-ignore
-      startBlock: {{startBlock}}
+      startBlock: 10211382
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
