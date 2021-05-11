@@ -20,7 +20,7 @@ dataSources:
         - name: Lottery
           file: ./src/abis/lottery.json
       entities:
-        - BridgeTransfer
+        - Create
       eventHandlers:
         - event: Create(indexed address,indexed uint256,uint256,uint256)
           handler: handleCreate
