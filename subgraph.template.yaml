@@ -1,0 +1,28 @@
+specVersion: 0.0.2
+description: Subgraph that indexes the lottery transfers
+repository: https://github.com/ianidi/lottery-subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Lottery
+    # prettier-ignore
+    network: {{network}}
+    source:
+      abi: Lottery
+      address: '{{lottery}}'
+      # prettier-ignore
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      abis:
+        - name: Lottery
+          file: ./src/abis/lottery.json
+      entities:
+        - BridgeTransfer
+      eventHandlers:
+        - event: TokensBridged(indexed address,indexed address,uint256,indexed bytes32)
+          handler: handleBridgeTransfer
+      file: ./src/mappings/lottery.ts
+      language: wasm/assemblyscript
