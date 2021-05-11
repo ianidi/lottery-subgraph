@@ -1,5 +1,5 @@
 {
-  "name": "ianidi/lottery-subgraph",
+  "name": "ianidi/lottery_subgraph",
   "version": "1.0.0",
   "dependencies": {
     "@graphprotocol/graph-cli": "0.20.0",
