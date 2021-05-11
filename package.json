@@ -1,5 +1,5 @@
 {
-  "name": "@omnibridge/subgraph",
+  "name": "ianidi/lottery-subgraph",
   "version": "1.0.0",
   "dependencies": {
     "@graphprotocol/graph-cli": "0.20.0",
