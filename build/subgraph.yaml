@@ -17,6 +17,8 @@ dataSources:
       abis:
         - name: Lottery
           file: Lottery/src/abis/lottery.json
+        - name: ERC20
+          file: Lottery/src/abis/erc20.json
       entities:
         - Create
       eventHandlers:

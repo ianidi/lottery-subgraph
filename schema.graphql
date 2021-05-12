@@ -11,6 +11,9 @@ type CreateLottery @entity {
   duration: BigInt
   formula: BigInt
   collateral: Bytes
+  tokenName: String
+  tokenSymbol: String
+  tokenDecimals: Int
 }
 
 type PlayLottery @entity {
@@ -23,4 +26,7 @@ type PlayLottery @entity {
   formula: BigInt
   collateral: Bytes
   timestamp: BigInt!
+  tokenName: String
+  tokenSymbol: String
+  tokenDecimals: Int
 }

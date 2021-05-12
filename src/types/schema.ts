@@ -195,6 +195,49 @@ export class CreateLottery extends Entity {
       this.set("collateral", Value.fromBytes(value as Bytes));
     }
   }
+
+  get tokenName(): string | null {
+    let value = this.get("tokenName");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set tokenName(value: string | null) {
+    if (value === null) {
+      this.unset("tokenName");
+    } else {
+      this.set("tokenName", Value.fromString(value as string));
+    }
+  }
+
+  get tokenSymbol(): string | null {
+    let value = this.get("tokenSymbol");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set tokenSymbol(value: string | null) {
+    if (value === null) {
+      this.unset("tokenSymbol");
+    } else {
+      this.set("tokenSymbol", Value.fromString(value as string));
+    }
+  }
+
+  get tokenDecimals(): i32 {
+    let value = this.get("tokenDecimals");
+    return value.toI32();
+  }
+
+  set tokenDecimals(value: i32) {
+    this.set("tokenDecimals", Value.fromI32(value));
+  }
 }
 
 export class PlayLottery extends Entity {
@@ -337,5 +380,48 @@ export class PlayLottery extends Entity {
 
   set timestamp(value: BigInt) {
     this.set("timestamp", Value.fromBigInt(value));
+  }
+
+  get tokenName(): string | null {
+    let value = this.get("tokenName");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set tokenName(value: string | null) {
+    if (value === null) {
+      this.unset("tokenName");
+    } else {
+      this.set("tokenName", Value.fromString(value as string));
+    }
+  }
+
+  get tokenSymbol(): string | null {
+    let value = this.get("tokenSymbol");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set tokenSymbol(value: string | null) {
+    if (value === null) {
+      this.unset("tokenSymbol");
+    } else {
+      this.set("tokenSymbol", Value.fromString(value as string));
+    }
+  }
+
+  get tokenDecimals(): i32 {
+    let value = this.get("tokenDecimals");
+    return value.toI32();
+  }
+
+  set tokenDecimals(value: i32) {
+    this.set("tokenDecimals", Value.fromI32(value));
   }
 }

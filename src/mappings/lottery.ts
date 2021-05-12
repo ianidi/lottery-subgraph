@@ -1,5 +1,6 @@
 import { log } from '@graphprotocol/graph-ts';
 import { Lottery, Create, Play } from '../types/Lottery/Lottery';
+import { ERC20 } from '../types/Lottery/ERC20';
 import { CreateLottery, PlayLottery } from '../types/schema';
 
 export function handleCreate(event: Create): void {
@@ -30,6 +31,27 @@ export function handleCreate(event: Create): void {
   lottery.lotteryID = event.params.lotteryID;
   lottery.amount = event.params.amount;
   lottery.timestamp = event.block.timestamp;
+
+  // Bind the contract to the address that emitted the event
+  let tokenInstance = ERC20.bind(currentLottery.value8);
+
+  // Access state variables and functions by calling them
+  let name = tokenInstance.try_name();
+  let symbol = tokenInstance.try_symbol();
+  let decimals = tokenInstance.try_decimals();
+
+  if (!name.reverted) {
+    lottery.tokenName = name.value;
+  }
+
+  if (!symbol.reverted) {
+    lottery.tokenSymbol = symbol.value;
+  }
+
+  if (!decimals.reverted) {
+    lottery.tokenDecimals = decimals.value;
+  }
+
   lottery.save();
 }
 
@@ -58,5 +80,28 @@ export function handlePlay(event: Play): void {
   lottery.amount = event.params.amount;
   lottery.result = event.params.result;
   lottery.timestamp = event.block.timestamp;
+
+
+
+  // Bind the contract to the address that emitted the event
+  let tokenInstance = ERC20.bind(currentLottery.value8);
+
+  // Access state variables and functions by calling them
+  let name = tokenInstance.try_name();
+  let symbol = tokenInstance.try_symbol();
+  let decimals = tokenInstance.try_decimals();
+
+  if (!name.reverted) {
+    lottery.tokenName = name.value;
+  }
+
+  if (!symbol.reverted) {
+    lottery.tokenSymbol = symbol.value;
+  }
+
+  if (!decimals.reverted) {
+    lottery.tokenDecimals = decimals.value;
+  }
+
   lottery.save();
 }
