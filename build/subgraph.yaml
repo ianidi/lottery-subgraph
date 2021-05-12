@@ -22,5 +22,7 @@ dataSources:
       eventHandlers:
         - event: Create(indexed address,indexed uint256,uint256,uint256)
           handler: handleCreate
+        - event: Play(indexed address,indexed uint256,uint256,bool,uint256)
+          handler: handlePlay
       file: Lottery/Lottery.wasm
       language: wasm/assemblyscript

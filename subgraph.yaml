@@ -24,5 +24,7 @@ dataSources:
       eventHandlers:
         - event: Create(indexed address,indexed uint256,uint256,uint256)
           handler: handleCreate
+        - event: Play(indexed address,indexed uint256,uint256,bool,uint256)
+          handler: handlePlay
       file: ./src/mappings/lottery.ts
       language: wasm/assemblyscript
