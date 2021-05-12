@@ -162,6 +162,23 @@ export class CreateLottery extends Entity {
     }
   }
 
+  get formula(): BigInt | null {
+    let value = this.get("formula");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set formula(value: BigInt | null) {
+    if (value === null) {
+      this.unset("formula");
+    } else {
+      this.set("formula", Value.fromBigInt(value as BigInt));
+    }
+  }
+
   get collateral(): Bytes | null {
     let value = this.get("collateral");
     if (value === null || value.kind == ValueKind.NULL) {
@@ -277,6 +294,23 @@ export class PlayLottery extends Entity {
 
   set result(value: boolean) {
     this.set("result", Value.fromBoolean(value));
+  }
+
+  get formula(): BigInt | null {
+    let value = this.get("formula");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set formula(value: BigInt | null) {
+    if (value === null) {
+      this.unset("formula");
+    } else {
+      this.set("formula", Value.fromBigInt(value as BigInt));
+    }
   }
 
   get collateral(): Bytes | null {

@@ -9,6 +9,7 @@ type CreateLottery @entity {
   liquidity: BigInt
   maxBetPercent: BigInt
   duration: BigInt
+  formula: BigInt
   collateral: Bytes
 }
 
@@ -19,6 +20,7 @@ type PlayLottery @entity {
   lotteryID: BigInt
   amount: BigInt
   result: Boolean
+  formula: BigInt
   collateral: Bytes
   timestamp: BigInt!
 }

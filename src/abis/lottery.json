@@ -28,7 +28,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_time",
+        "name": "time",
         "type": "uint256"
       }
     ],
@@ -59,7 +59,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_time",
+        "name": "time",
         "type": "uint256"
       }
     ],
@@ -103,19 +103,19 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "betAmount",
+        "name": "amount",
         "type": "uint256"
       },
       {
         "indexed": false,
         "internalType": "bool",
-        "name": "gameResult",
+        "name": "result",
         "type": "bool"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_time",
+        "name": "time",
         "type": "uint256"
       }
     ],
@@ -146,7 +146,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_time",
+        "name": "time",
         "type": "uint256"
       }
     ],
@@ -246,6 +246,11 @@
       {
         "internalType": "uint256",
         "name": "duration",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "formula",
         "type": "uint256"
       },
       {

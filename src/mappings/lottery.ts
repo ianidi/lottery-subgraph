@@ -22,7 +22,8 @@ export function handleCreate(event: Create): void {
   lottery.liquidity = currentLottery.value3;
   lottery.maxBetPercent = currentLottery.value4;
   lottery.duration = currentLottery.value6;
-  lottery.collateral = currentLottery.value7;
+  lottery.formula = currentLottery.value7;
+  lottery.collateral = currentLottery.value8;
 
   lottery.txHash = txHash;
   lottery.member = event.params.member;
@@ -48,13 +49,14 @@ export function handlePlay(event: Play): void {
   // Access state variables and functions by calling them
   let currentLottery = contract.lottery(event.params.lotteryID);
 
-  lottery.collateral = currentLottery.value7;
+  lottery.formula = currentLottery.value7;
+  lottery.collateral = currentLottery.value8;
 
   lottery.txHash = txHash;
   lottery.member = event.params.member;
   lottery.lotteryID = event.params.lotteryID;
-  lottery.amount = event.params.betAmount;
-  lottery.result = event.params.gameResult;
+  lottery.amount = event.params.amount;
+  lottery.result = event.params.result;
   lottery.timestamp = event.block.timestamp;
   lottery.save();
 }

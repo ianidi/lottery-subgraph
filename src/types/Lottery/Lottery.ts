@@ -35,7 +35,7 @@ export class Create__Params {
     return this._event.parameters[2].value.toBigInt();
   }
 
-  get _time(): BigInt {
+  get time(): BigInt {
     return this._event.parameters[3].value.toBigInt();
   }
 }
@@ -65,7 +65,7 @@ export class Deposit__Params {
     return this._event.parameters[2].value.toBigInt();
   }
 
-  get _time(): BigInt {
+  get time(): BigInt {
     return this._event.parameters[3].value.toBigInt();
   }
 }
@@ -113,15 +113,15 @@ export class Play__Params {
     return this._event.parameters[1].value.toBigInt();
   }
 
-  get betAmount(): BigInt {
+  get amount(): BigInt {
     return this._event.parameters[2].value.toBigInt();
   }
 
-  get gameResult(): boolean {
+  get result(): boolean {
     return this._event.parameters[3].value.toBoolean();
   }
 
-  get _time(): BigInt {
+  get time(): BigInt {
     return this._event.parameters[4].value.toBigInt();
   }
 }
@@ -151,7 +151,7 @@ export class Redeem__Params {
     return this._event.parameters[2].value.toBigInt();
   }
 
-  get _time(): BigInt {
+  get time(): BigInt {
     return this._event.parameters[3].value.toBigInt();
   }
 }
@@ -164,7 +164,8 @@ export class Lottery__lotteryResult {
   value4: BigInt;
   value5: BigInt;
   value6: BigInt;
-  value7: Address;
+  value7: BigInt;
+  value8: Address;
 
   constructor(
     value0: boolean,
@@ -174,7 +175,8 @@ export class Lottery__lotteryResult {
     value4: BigInt,
     value5: BigInt,
     value6: BigInt,
-    value7: Address
+    value7: BigInt,
+    value8: Address
   ) {
     this.value0 = value0;
     this.value1 = value1;
@@ -184,6 +186,7 @@ export class Lottery__lotteryResult {
     this.value5 = value5;
     this.value6 = value6;
     this.value7 = value7;
+    this.value8 = value8;
   }
 
   toMap(): TypedMap<string, ethereum.Value> {
@@ -198,7 +201,8 @@ export class Lottery__lotteryResult {
     map.set("value4", ethereum.Value.fromUnsignedBigInt(this.value4));
     map.set("value5", ethereum.Value.fromUnsignedBigInt(this.value5));
     map.set("value6", ethereum.Value.fromUnsignedBigInt(this.value6));
-    map.set("value7", ethereum.Value.fromAddress(this.value7));
+    map.set("value7", ethereum.Value.fromUnsignedBigInt(this.value7));
+    map.set("value8", ethereum.Value.fromAddress(this.value8));
     return map;
   }
 }
@@ -306,7 +310,7 @@ export class Lottery extends ethereum.SmartContract {
   lottery(param0: BigInt): Lottery__lotteryResult {
     let result = super.call(
       "lottery",
-      "lottery(uint256):(bool,uint8,uint256,uint256,uint256,uint256,uint256,address)",
+      "lottery(uint256):(bool,uint8,uint256,uint256,uint256,uint256,uint256,uint256,address)",
       [ethereum.Value.fromUnsignedBigInt(param0)]
     );
 
@@ -318,14 +322,15 @@ export class Lottery extends ethereum.SmartContract {
       result[4].toBigInt(),
       result[5].toBigInt(),
       result[6].toBigInt(),
-      result[7].toAddress()
+      result[7].toBigInt(),
+      result[8].toAddress()
     );
   }
 
   try_lottery(param0: BigInt): ethereum.CallResult<Lottery__lotteryResult> {
     let result = super.tryCall(
       "lottery",
-      "lottery(uint256):(bool,uint8,uint256,uint256,uint256,uint256,uint256,address)",
+      "lottery(uint256):(bool,uint8,uint256,uint256,uint256,uint256,uint256,uint256,address)",
       [ethereum.Value.fromUnsignedBigInt(param0)]
     );
     if (result.reverted) {
@@ -341,7 +346,8 @@ export class Lottery extends ethereum.SmartContract {
         value[4].toBigInt(),
         value[5].toBigInt(),
         value[6].toBigInt(),
-        value[7].toAddress()
+        value[7].toBigInt(),
+        value[8].toAddress()
       )
     );
   }
