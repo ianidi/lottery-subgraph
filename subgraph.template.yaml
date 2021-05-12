@@ -1,5 +1,5 @@
 specVersion: 0.0.2
-description: Subgraph that indexes the lottery transfers
+description: Subgraph that indexes the lottery
 repository: https://github.com/ianidi/lottery-subgraph
 schema:
   file: ./schema.graphql

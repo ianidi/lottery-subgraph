@@ -1,5 +1,5 @@
 specVersion: 0.0.2
-description: Subgraph that indexes the lottery transfers
+description: Subgraph that indexes the lottery
 repository: https://github.com/ianidi/lottery-subgraph
 schema:
   file: ./schema.graphql
@@ -10,9 +10,9 @@ dataSources:
     network: ropsten
     source:
       abi: Lottery
-      address: '0xa960d095470f7509955d5402e36d9db984b5c8e2'
+      address: '0xe3ed91da3daab35fd95ec192b14d19b73d84d6bf'
       # prettier-ignore
-      startBlock: 10211382
+      startBlock: 10210382
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
