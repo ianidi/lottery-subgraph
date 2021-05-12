@@ -1,20 +1,33 @@
 import { log } from '@graphprotocol/graph-ts';
-import { Create } from '../types/Lottery/Lottery';
-import { Lottery } from '../types/schema';
+import { Lottery, Create } from '../types/Lottery/Lottery';
+import { CreateLottery } from '../types/schema';
 
 export function handleCreate(event: Create): void {
   log.debug('Parsing Create for txHash {}', [
     event.transaction.hash.toHexString(),
   ]);
   let txHash = event.transaction.hash;
-  let lottery = Lottery.load(txHash.toHexString());
+  let lottery = CreateLottery.load(txHash.toHexString());
   if (lottery == null) {
-    lottery = new Lottery(txHash.toHexString());
+    lottery = new CreateLottery(txHash.toHexString());
   }
+
+  // Bind the contract to the address that emitted the event
+  let contract = Lottery.bind(event.address);
+
+  // Access state variables and functions by calling them
+  let currentLottery = contract.lottery(event.params.lotteryID);
+
+  // lottery.status = currentLottery.value1;
+  lottery.liquidity = currentLottery.value3;
+  lottery.maxBetPercent = currentLottery.value4;
+  lottery.duration = currentLottery.value6;
+  lottery.collateral = currentLottery.value7;
+
+  lottery.txHash = txHash;
   lottery.member = event.params.member;
   lottery.lotteryID = event.params.lotteryID;
   lottery.amount = event.params.amount;
-  lottery.txHash = txHash;
   lottery.timestamp = event.block.timestamp;
   lottery.save();
 }

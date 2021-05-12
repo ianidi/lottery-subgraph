@@ -1,11 +1,13 @@
-type Lottery @entity {
+type CreateLottery @entity {
   id: ID!
+  txHash: Bytes!
   member: Bytes
   lotteryID: BigInt
   amount: BigInt
-  executor: Bytes
-  messageId: Bytes
-  status: Boolean
   timestamp: BigInt!
-  txHash: Bytes!
+  # status: Bytes
+  liquidity: BigInt
+  maxBetPercent: BigInt
+  duration: BigInt
+  collateral: Bytes
 }

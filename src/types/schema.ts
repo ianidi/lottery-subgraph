@@ -12,7 +12,7 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class Lottery extends Entity {
+export class CreateLottery extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -20,17 +20,17 @@ export class Lottery extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save Lottery entity without an ID");
+    assert(id !== null, "Cannot save CreateLottery entity without an ID");
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save Lottery entity with non-string ID. " +
+      "Cannot save CreateLottery entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("Lottery", id.toString(), this);
+    store.set("CreateLottery", id.toString(), this);
   }
 
-  static load(id: string): Lottery | null {
-    return store.get("Lottery", id) as Lottery | null;
+  static load(id: string): CreateLottery | null {
+    return store.get("CreateLottery", id) as CreateLottery | null;
   }
 
   get id(): string {
@@ -40,6 +40,15 @@ export class Lottery extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
+  }
+
+  get txHash(): Bytes {
+    let value = this.get("txHash");
+    return value.toBytes();
+  }
+
+  set txHash(value: Bytes) {
+    this.set("txHash", Value.fromBytes(value));
   }
 
   get member(): Bytes | null {
@@ -93,49 +102,6 @@ export class Lottery extends Entity {
     }
   }
 
-  get executor(): Bytes | null {
-    let value = this.get("executor");
-    if (value === null || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBytes();
-    }
-  }
-
-  set executor(value: Bytes | null) {
-    if (value === null) {
-      this.unset("executor");
-    } else {
-      this.set("executor", Value.fromBytes(value as Bytes));
-    }
-  }
-
-  get messageId(): Bytes | null {
-    let value = this.get("messageId");
-    if (value === null || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBytes();
-    }
-  }
-
-  set messageId(value: Bytes | null) {
-    if (value === null) {
-      this.unset("messageId");
-    } else {
-      this.set("messageId", Value.fromBytes(value as Bytes));
-    }
-  }
-
-  get status(): boolean {
-    let value = this.get("status");
-    return value.toBoolean();
-  }
-
-  set status(value: boolean) {
-    this.set("status", Value.fromBoolean(value));
-  }
-
   get timestamp(): BigInt {
     let value = this.get("timestamp");
     return value.toBigInt();
@@ -145,12 +111,71 @@ export class Lottery extends Entity {
     this.set("timestamp", Value.fromBigInt(value));
   }
 
-  get txHash(): Bytes {
-    let value = this.get("txHash");
-    return value.toBytes();
+  get liquidity(): BigInt | null {
+    let value = this.get("liquidity");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
   }
 
-  set txHash(value: Bytes) {
-    this.set("txHash", Value.fromBytes(value));
+  set liquidity(value: BigInt | null) {
+    if (value === null) {
+      this.unset("liquidity");
+    } else {
+      this.set("liquidity", Value.fromBigInt(value as BigInt));
+    }
+  }
+
+  get maxBetPercent(): BigInt | null {
+    let value = this.get("maxBetPercent");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set maxBetPercent(value: BigInt | null) {
+    if (value === null) {
+      this.unset("maxBetPercent");
+    } else {
+      this.set("maxBetPercent", Value.fromBigInt(value as BigInt));
+    }
+  }
+
+  get duration(): BigInt | null {
+    let value = this.get("duration");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set duration(value: BigInt | null) {
+    if (value === null) {
+      this.unset("duration");
+    } else {
+      this.set("duration", Value.fromBigInt(value as BigInt));
+    }
+  }
+
+  get collateral(): Bytes | null {
+    let value = this.get("collateral");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set collateral(value: Bytes | null) {
+    if (value === null) {
+      this.unset("collateral");
+    } else {
+      this.set("collateral", Value.fromBytes(value as Bytes));
+    }
   }
 }
