@@ -11,3 +11,14 @@ type CreateLottery @entity {
   duration: BigInt
   collateral: Bytes
 }
+
+type PlayLottery @entity {
+  id: ID!
+  txHash: Bytes!
+  member: Bytes
+  lotteryID: BigInt
+  amount: BigInt
+  result: Boolean
+  collateral: Bytes
+  timestamp: BigInt!
+}

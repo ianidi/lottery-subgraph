@@ -179,3 +179,129 @@ export class CreateLottery extends Entity {
     }
   }
 }
+
+export class PlayLottery extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save PlayLottery entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save PlayLottery entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("PlayLottery", id.toString(), this);
+  }
+
+  static load(id: string): PlayLottery | null {
+    return store.get("PlayLottery", id) as PlayLottery | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get txHash(): Bytes {
+    let value = this.get("txHash");
+    return value.toBytes();
+  }
+
+  set txHash(value: Bytes) {
+    this.set("txHash", Value.fromBytes(value));
+  }
+
+  get member(): Bytes | null {
+    let value = this.get("member");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set member(value: Bytes | null) {
+    if (value === null) {
+      this.unset("member");
+    } else {
+      this.set("member", Value.fromBytes(value as Bytes));
+    }
+  }
+
+  get lotteryID(): BigInt | null {
+    let value = this.get("lotteryID");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set lotteryID(value: BigInt | null) {
+    if (value === null) {
+      this.unset("lotteryID");
+    } else {
+      this.set("lotteryID", Value.fromBigInt(value as BigInt));
+    }
+  }
+
+  get amount(): BigInt | null {
+    let value = this.get("amount");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set amount(value: BigInt | null) {
+    if (value === null) {
+      this.unset("amount");
+    } else {
+      this.set("amount", Value.fromBigInt(value as BigInt));
+    }
+  }
+
+  get result(): boolean {
+    let value = this.get("result");
+    return value.toBoolean();
+  }
+
+  set result(value: boolean) {
+    this.set("result", Value.fromBoolean(value));
+  }
+
+  get collateral(): Bytes | null {
+    let value = this.get("collateral");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set collateral(value: Bytes | null) {
+    if (value === null) {
+      this.unset("collateral");
+    } else {
+      this.set("collateral", Value.fromBytes(value as Bytes));
+    }
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+}
